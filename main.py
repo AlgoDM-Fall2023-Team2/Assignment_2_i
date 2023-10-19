@@ -16,7 +16,7 @@ st.header("Generate Data")
 try:
 
     # Parameter for number of days of data to be generated  
-    days_param = st.number_input("Choose number of Days", min_value=60, max_value=160, value='min')
+    days_param = st.number_input("Choose number of Days", min_value=60, max_value=160, value=60)
 
     # Parameter for choosing the start date for data to be generated
     date_param = st.date_input("Select Start Date:", value=datetime.date(2022, 1, 1),

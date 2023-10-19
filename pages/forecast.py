@@ -1,7 +1,7 @@
 import datetime
 import streamlit as st
 import pandas as pd
-from functions.get_data import get_query_data, execute_query
+from functions.get_data import get_query_data, execute_query, execute_model
 from functions.get_query import read_query
 import altair as alt
 
@@ -15,10 +15,12 @@ forecast_query = read_query(f"queries/forecast/forecast.sql").replace("{day_para
 
 actual_data = read_query(f'queries/forecast/actual.sql')
 
-
+forecast_model = read_query(f'queries/forecast/forecast_model.sql')
 
 button_clicked = st.button('Execute', key=1002)
 if button_clicked:
+    
+    execute_model(forecast_model)
 
     df_1 = get_query_data(forecast_query)
     df_2 = get_query_data(actual_data)

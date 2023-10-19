@@ -1,5 +1,5 @@
 import logging
-
+import snowflake.connector
 from sqlalchemy import create_engine
 import pandas as pd
 import streamlit as st
@@ -57,3 +57,17 @@ def execute_query(query):
         logging.info(f"{datetime.datetime.now()}: Execution finished...")
         connection.close()
         engine.dispose()
+        
+def execute_model(query):
+    conn = snowflake.connector.connect(
+        user=st.secrets.user,
+        password=st.secrets.password,
+        account=st.secrets.account_identifier,
+        database=st.secrets.database,
+        warehouse = st.secrets.warehouse,
+        schema=st.secrets.schema,    
+    )
+    
+    cursor = conn.cursor()
+    cursor.execute(query)
+    cursor.close()
