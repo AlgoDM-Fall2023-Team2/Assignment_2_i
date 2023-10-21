@@ -3,19 +3,20 @@ import streamlit as st
 import pandas as pd
 from functions.get_data import get_query_data, execute_query, execute_model
 from functions.get_query import read_query
-import altair as alt
-from main import date_param, days_param
+
 
 
 st.subheader("Anamoly Detection")
 
 
-ls_date = date_param + datetime.timedelta(days=days_param+1)
+
+
+ls_date = st.session_state.date_param + datetime.timedelta(days=st.session_state.days_param+1)
 
 end_date = ls_date + datetime.timedelta(days=60)
 
-impressions = st.number_input("Choose the number of impressions to be checked", min_value=None, max_value=None, value=7000)
-date_param = st.date_input("Select Start Date:", value = ls_date,
+impressions = st.number_input("Enter the number of impressions to be checked", min_value=None, max_value=None, value=7000)
+date_param = st.date_input("Select a Date:", value = ls_date,
                                 min_value=ls_date ,
                                 max_value= end_date)
 
@@ -24,7 +25,7 @@ anomaly_model = read_query(f'queries/anomaly/anomaly_model.sql')
 anomaly_call = read_query(f'queries/anomaly/anomaly_call.sql').replace("{date_param}", date_param.strftime("%Y-%m-%d")).replace("{impression}", str(impressions))
 
 
-button_clicked = st.button('Execute')
+button_clicked = st.button('Execute',key=1004)
 if button_clicked:
     
     execute_model(anomaly_model)
@@ -42,3 +43,4 @@ if button_clicked:
     else:
          st.write("For the chosen date the number of impressions are not an anomaly")   
 st.markdown("---")
+

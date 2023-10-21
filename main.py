@@ -17,13 +17,14 @@ st.header("Generate Data")
 try:
 
     # Parameter for number of days of data to be generated  
-    days_param = st.number_input("Choose number of Days", min_value=60, max_value=160, value=60)
+    days_param = st.number_input("Enter number of Days", min_value=60, max_value=160, value=60)
 
     # Parameter for choosing the start date for data to be generated
     date_param = st.date_input("Select Start Date:", value=datetime.date(2022, 1, 1),
                                 min_value=datetime.date(2022, 1, 1),
                                 max_value=datetime.date(2022, 12, 31))
-
+   
+    
     # Clean any previous data in the table
     empty_table = read_query(f"queries/data/empty_table.sql")
 
@@ -39,7 +40,10 @@ try:
     button_clicked = st.button('Generate', key=1002)
    
     if button_clicked:
-
+        
+        st.session_state.date_param = date_param
+        st.session_state.days_param = days_param
+        
         execute_query(empty_table) # Empty table
         execute_query(generate_data) # Generate data
         execute_query(massage_data) # Massage the data
@@ -58,3 +62,4 @@ except IndexError as ie:
                 unsafe_allow_html=True)
 except BaseException as e:
     st.markdown(f">{e}")
+    

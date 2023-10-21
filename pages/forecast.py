@@ -9,7 +9,7 @@ import altair as alt
 st.subheader("Forecasting Ad Impressions")
 
 
-day = st.number_input("Choose the number of days you wish to forecast for", min_value=7, max_value=60, value=7)
+day = st.number_input("Enter the number of days you wish to forecast for", min_value=7, max_value=None, value=7)
 
 forecast_query = read_query(f"queries/forecast/forecast.sql").replace("{day_param}", str(day))
 
@@ -17,7 +17,7 @@ actual_data = read_query(f'queries/forecast/actual.sql')
 
 forecast_model = read_query(f'queries/forecast/forecast_model.sql')
 
-button_clicked = st.button('Execute', key=1002)
+button_clicked = st.button('Execute', key=1003)
 if button_clicked:
     
     execute_model(forecast_model)
