@@ -24,7 +24,7 @@ anomaly_model = read_query(f'queries/anomaly/anomaly_model.sql')
 anomaly_call = read_query(f'queries/anomaly/anomaly_call.sql').replace("{date_param}", date_param.strftime("%Y-%m-%d")).replace("{impression}", str(impressions))
 
 
-button_clicked = st.button('Execute', key=1002)
+button_clicked = st.button('Execute')
 if button_clicked:
     
     execute_model(anomaly_model)
