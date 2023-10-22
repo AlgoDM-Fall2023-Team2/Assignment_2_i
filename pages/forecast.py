@@ -8,6 +8,7 @@ import altair as alt
 
 st.subheader("Forecasting Ad Impressions")
 
+st.write("Using the generated data, an ML model is trained to forecast the ad-impressions. You can input the number of days you wish to forecast the ad-impressions for, and the snowflake powered ML model comes up with predictions for each of the given days.")
 
 day = st.number_input("Enter the number of days you wish to forecast for", min_value=7, max_value=None, value=7)
 
@@ -42,7 +43,7 @@ if button_clicked:
         color=alt.Color('Legend', scale=alt.Scale(domain=['Actual', 'Forecast'], range=['grey', 'orange']))
     ).properties(width=600, height=400)
 
-    st.markdown(f"Here's a graph showing the actual and forecasted ad-impressions")
+    st.markdown(f"Here's a graph showing the actual ad-impressions that the model has been trained for and forecasted ad-impressions")
     st.altair_chart(chart, use_container_width=True)
        
 st.markdown("---")

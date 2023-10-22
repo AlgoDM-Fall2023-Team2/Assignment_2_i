@@ -8,6 +8,7 @@ from functions.get_query import read_query
 
 st.subheader("Anamoly Detection")
 
+st.write("Using the generated data, a new Snowflake-ML model is trained to detect an anomaly. This model is now ready to predict whether the volume of ad impressions on a given day is anticipated or is an anomaly. ")
 
 try:
 

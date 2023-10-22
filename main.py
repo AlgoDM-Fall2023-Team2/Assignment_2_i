@@ -17,8 +17,12 @@ with open("home_page_content.html", mode="r",  encoding="utf8") as file:
 
 st.markdown(home_page_content, unsafe_allow_html=True)
 
+
 # ---------------------------------------------------------------
 st.header("Generate Data")
+
+st.write("To generate data for an interesting forecasting perspective and test for yourself, you can enter the date and number of days for which you want to generate data. With these inputs, a random volume of impressions is generated for each of the given number of days ahead of the input date. To make things more interesting, data is tweaked to showcase upward and downward trends on weekdays and weekends respectively.")
+
     
 try:
 
@@ -59,6 +63,7 @@ try:
 
         st.table(df_1)
 
+        st.write("Here's a graph showing the data that has been generated:")
         st.line_chart(data=df_1, x="day", y="impression_count", color="#0000ff") # Line chart for impressions
 
     st.markdown("---")
